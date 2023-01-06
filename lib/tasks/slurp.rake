@@ -7,14 +7,12 @@ namespace :slurp do
     csv.each do |row|
       # puts row.to_hash
       m = Map.new
+      m.id = row['id']
       m.x = row["x"]
       m.y = row["y"]
       m.name = row["name"]
-      m.group = row["group"]
+      m.city = row["city"]
       m.description = row["description"]
-      if row["npcs"] != nil 
-        m.npcs = row["npcs"].split(';').map(&:to_i)
-      end
       m.save
     end
     puts "There are now #{Map.count} rows in the map table"

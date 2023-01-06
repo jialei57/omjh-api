@@ -3,7 +3,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     create_table :users do |t|
       t.string :username, null: false, index: { unique: true }
       t.string :password_digest
-      t.json :status
 
       t.timestamps
     end

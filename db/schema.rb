@@ -10,17 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_22_153209) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_26_150420) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "sex", null: false
+    t.json "status"
+    t.integer "map", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_characters_on_name", unique: true
+    t.index ["user_id"], name: "index_characters_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content", null: false
+    t.string "char_name", null: false
+    t.integer "map", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest"
-    t.json "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "characters", "users"
 end

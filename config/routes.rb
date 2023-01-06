@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :users
-    end
-  end
+  
+  mount ActionCable.server => "/cable"
+
+  resources :users
+  resources :characters
+  resources :messages
 
   post 'authenticate', to: 'authentication#authenticate'
+
+  get 'mobile-app-version', to: 'version#mobile_app_version'
 end 
