@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   post 'authenticate', to: 'authentication#authenticate'
 
   get 'mobile-app-version', to: 'version#mobile_app_version'
+
+  get 'map', to: 'download#download_map'
 end 

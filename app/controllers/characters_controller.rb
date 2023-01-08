@@ -29,11 +29,25 @@ class CharactersController < ApplicationController
   # PATCH/PUT /characters/1
   def update
     if @character.update(character_params)
-      render json: @character
+      if @character.previous_changes.empty?
+        @character.touch
+      else 
+        ActionCable.server.broadcast('map_#{@character.map}', {
+          char_name: char_name,
+          content: content,
+          map: map
+        })
+      end
+
+
+
+      @players = Character.where(map: @character.map).where(['updated_at > ?', 3.minutes.ago]).where(['id != ?', @character.id])
+      render json: @players
     else
       render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
 
   # DELETE /characters/1
   def destroy
