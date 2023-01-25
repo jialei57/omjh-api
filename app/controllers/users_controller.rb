@@ -9,7 +9,7 @@ class UsersController  < ApplicationController
             render json: { message: 'success' }, status: :created
         else
             render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-      end
+        end
     end
   
     private 

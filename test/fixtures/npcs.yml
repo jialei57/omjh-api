@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  String: MyString
+  map: 1
+  status: 
+  info: 
+
+two:
+  name: MyString
+  String: MyString
+  map: 1
+  status: 
+  info: 

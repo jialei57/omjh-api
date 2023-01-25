@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_26_150420) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_083522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_150420) do
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "is_unique"
+    t.string "item_type"
+    t.json "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_items_on_name", unique: true
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string "content", null: false
     t.string "char_name", null: false
@@ -34,9 +44,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_150420) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "npcs", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "map"
+    t.json "status"
+    t.json "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quests", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.boolean "is_main"
+    t.integer "next"
+    t.json "goals"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest"
+    t.boolean "online"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true

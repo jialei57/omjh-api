@@ -1,0 +1,4 @@
+id,name,description,is_main,next,goals
+1,"找点吃的","早上起来, 感觉肚子很饿. 得去找点吃的.\n去李大姐家里转转吧.",true,2,"{'type': 'talk', 'npc': '2', 'line': '是不是肚子饿了? 算你小子运气好, 今日是老娘生辰, 你去后院杀只鸡, 在摘两根葱, 我们吃顿好的.'}"
+2,"找点吃的","去李寡妇家后院拿食材.",true,3,"{'type': 'collect', 'items': [{'id': 1, 'quantity': 1}, {'id': 2, 'quantity': 2}]}"
+3,"找点吃的","食材搞好了, 拿给李寡妇吧.",true,4,"{'type': 'talk', 'npc': '2', 'line': '饭菜马上就好.', 'aside': '你大吃了一顿.'}"

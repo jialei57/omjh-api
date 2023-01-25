@@ -1,0 +1,3 @@
+id,name,is_unique,item_type,info
+1,"鸡肉",false,"other","{'description': '一块鸡肉.'}"
+2,"大葱",false,"other","{'description': '一根大葱.'}"
