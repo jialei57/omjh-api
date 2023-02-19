@@ -1,7 +1,7 @@
 require 'authorize_api_request'
 
 class CharactersController < ApplicationController
-  before_action :set_character, only: %i[update destroy get_processing_quests complete_quest]
+  before_action :set_character, only: %i[update destroy get_processing_quests complete_quest killed_npc get_items]
     
   # GET /characters
   def index
@@ -30,18 +30,18 @@ class CharactersController < ApplicationController
   end
 
   # PATCH/PUT /characters/1
-  def update
-    if @character.user_id != @current_user.id
-      render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
-      return
-    end
+  # def update
+  #   if @character.user_id != @current_user.id
+  #     render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
+  #     return
+  #   end
     
-    if @character.update(character_params)
-      render json: @character
-    else
-      render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
+  #   if @character.update(character_params)
+  #     render json: @character
+  #   else
+  #     render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
+  #   end
+  # end
 
   def get_processing_quests
     if @character.user_id != @current_user.id
@@ -54,16 +54,27 @@ class CharactersController < ApplicationController
       goals = q.goals
       items = goals['items']
       break if items == nil || items.empty?
-      # detailItems = []
-      puts '========================'
-      puts items
-      puts '========================'
       items.each do |i|
         im = Item.find_by_id(i['id'].to_i)
         i['item'] = im
       end
     end
     render json: quests
+  end
+
+  def get_items
+    if @character.user_id != @current_user.id
+      render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
+      return
+    end
+
+    items = []
+    @character.status['items'].each do |i|
+      item = Item.find_by_id(i['id'])
+      items.push({ 'item' => item, 'quantity' => i['quantity'] })
+    end
+
+    render json: items
   end
 
   def complete_quest
@@ -84,9 +95,53 @@ class CharactersController < ApplicationController
     end
 
     @character.status['processingQuests'].delete(quest.id)
-    @character.status['processingQuests'].push(quest.next)
+    @character.status['processingQuests'].push(quest.next) if quest.next != null
     @character.save
     render json: @character
+  end
+
+  def killed_npc
+    rewarded = {'items' => []}
+    nids = params[:nids]
+    nids.each do |n|
+      npc = Npc.find_by_id(n)
+      if npc == nil
+        render json: { errors: 'No such npc.' }, status: :unprocessable_entity
+        return
+      end
+  
+      rewards = npc.info['rewards']
+      if rewards != nil 
+        rewards['items'].each do |i|
+          odd = rand(0..1.0)
+          if odd < i['probability']
+            index = @character.status['items'].each_index.select {|e| @character.status['items'][e]['id'] == i['id']}
+            if index != nil and index.first != nil
+              @character.status['items'][index.first]['quantity'] += i['quantity'];
+            else
+              @character.status['items'].push({ 'id' => i['id'], 'quantity' => i['quantity'] })
+            end
+  
+            item = Item.find_by_id(i['id'])
+            rewarded['items'].push({ 'item' => item, 'quantity' => i['quantity'] })
+            @character.save
+          end
+        end
+      end
+
+      npc.die
+    end
+
+    itemChanged =  !rewarded['items'].empty?
+    items = []
+    if itemChanged 
+      @character.status['items'].each do |i|
+        item = Item.find_by_id(i['id'])
+        items.push({ 'item' => item, 'quantity' => i['quantity'] })
+      end
+    end
+
+    render json: {char: @character, item_changed: itemChanged, reward: rewarded, items: items }
   end
 
   # DELETE /characters/1

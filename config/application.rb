@@ -25,9 +25,5 @@ module OmjhApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.after_initialize do
-      @maps = [1, 2, 3, 4]
-    end
-
   end
 end

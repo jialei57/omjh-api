@@ -16,7 +16,12 @@ class AuthorizeApiRequest
     attr_reader :headers
   
     def user
+      user_by_token = User.where(token: headers['Authorization']).take
+      if user_by_token == nil
+        return nil
+      end
       @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+
       @user || errors.add(:token, 'Invalid token') && nil
     end
   

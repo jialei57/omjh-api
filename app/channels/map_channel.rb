@@ -15,7 +15,7 @@ class MapChannel < ApplicationCable::Channel
     char = Character.find(params[:charId])
     char.update(map: params[:id])
     chars = Character.where(map: params[:id]).joins(:user).where(users: { online: true })
-    npcs = Npc.where(map: params[:id])
+    npcs = Npc.where(map: params[:id]).select{|n| n.isAlive }
     ActionCable.server.broadcast("map_#{params[:id]}", {
       map: params[:id],
       players: chars.to_json,

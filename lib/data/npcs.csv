@@ -1,4 +1,4 @@
-id,name,map,status,info
-1,"阿黄",3,"{}","{'description': '一只普通的黄狗.\n它跟你很熟, 一直不停的对你摇尾巴.', 'actions': ['talk'], 'dialogs': ['汪汪!', '汪汪汪汪!']}"
-2,"李寡妇",5,"{}","{'description': '她看起来四十多岁.\n平时对你很照顾.', 'actions': ['talk'], 'dialogs': ['你也是个可怜的孩子...']}"
-3,"鸡",2,"{'hp': 10, 'died': false, 'speed': 0, 'defense': 0, 'attack': 1, 'hit': 6, 'dodge': 6}","{'description': '一只肥硕的大公鸡.', 'actions': ['kill'], 'type': 'animal', 'normal_attack': '啄了一口', 'rewards':{'items': [{'id': 1, 'quantity': 1, 'probability': 1}]}}"
+id,name,map,last_die_time,status,info
+1,"阿黄",3,,"{}","{'description': '一只普通的黄狗.\n它跟你很熟, 一直不停的对你摇尾巴.', 'actions': ['talk'], 'dialogs': ['汪汪!', '汪汪汪汪!']}"
+2,"李寡妇",5,,"{}","{'description': '她看起来四十多岁.\n平时对你很照顾.', 'actions': ['talk'], 'dialogs': ['你也是个可怜的孩子...']}"
+3,"鸡",2,,"{'hp': 10, 'speed': 0, 'defense': 0, 'attack': 1, 'hit': 6, 'dodge': 6}","{'refresh_time': 30, 'description': '一只肥硕的大公鸡.', 'actions': ['kill'], 'type': 'animal', 'normal_attack': '啄了一口', 'rewards':{'items': [{'id': 1, 'quantity': 1, 'probability': 1}]}}"

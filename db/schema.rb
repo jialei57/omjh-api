@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_083522) do
   create_table "npcs", force: :cascade do |t|
     t.string "name", null: false
     t.integer "map"
+    t.datetime "last_die_time"
     t.json "status"
     t.json "info"
     t.datetime "created_at", null: false
@@ -66,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_083522) do
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest"
+    t.string "token"
     t.boolean "online"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

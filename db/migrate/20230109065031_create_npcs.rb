@@ -3,6 +3,7 @@ class CreateNpcs < ActiveRecord::Migration[7.0]
     create_table :npcs do |t|
       t.string :name, null: false
       t.integer :map
+      t.datetime :last_die_time
       t.json :status
       t.json :info
 

@@ -28,6 +28,7 @@ namespace :slurp do
       m.id = row['id']
       m.name = row["name"]
       m.map = row["map"]
+      m.last_die_time = row["last_die_time"]
       m.status = JSON.parse(row['status'].gsub('\'', '"'))
       m.info = JSON.parse(row["info"].gsub('\'', '"'))
       m.save

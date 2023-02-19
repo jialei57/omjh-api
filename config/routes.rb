@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :messages
 
   get 'processing-quests/:id', to: 'characters#get_processing_quests'
+  get 'items/:id', to: 'characters#get_items'
   put 'complete-quest', to: 'characters#complete_quest'
+  put 'killed-npc', to: 'characters#killed_npc'
 
   post 'authenticate', to: 'authentication#authenticate'
 
