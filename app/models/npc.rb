@@ -1,5 +1,9 @@
 class Npc < ApplicationRecord
     def die
+        if npc_type == 'npc'
+            return
+        end
+
         self.last_die_time = DateTime.now
         self.save
         ActionCable.server.broadcast("map_#{map}", {

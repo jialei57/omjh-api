@@ -95,8 +95,12 @@ class CharactersController < ApplicationController
     end
 
     @character.status['processingQuests'].delete(quest.id)
-    @character.status['processingQuests'].push(quest.next) if quest.next != null
+    @character.status['completedQuests'].push(quest.id)
+    @character.status['processingQuests'].push(quest.next) if quest.next != nil
     @character.save
+
+
+
     render json: @character
   end
 
@@ -133,15 +137,7 @@ class CharactersController < ApplicationController
     end
 
     itemChanged =  !rewarded['items'].empty?
-    items = []
-    if itemChanged 
-      @character.status['items'].each do |i|
-        item = Item.find_by_id(i['id'])
-        items.push({ 'item' => item, 'quantity' => i['quantity'] })
-      end
-    end
-
-    render json: {char: @character, item_changed: itemChanged, reward: rewarded, items: items }
+    render json: {char: @character, item_changed: itemChanged, reward: rewarded}
   end
 
   # DELETE /characters/1

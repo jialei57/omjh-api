@@ -28,6 +28,7 @@ namespace :slurp do
       m.id = row['id']
       m.name = row["name"]
       m.map = row["map"]
+      m.npc_type = row["npc_type"]
       m.last_die_time = row["last_die_time"]
       m.status = JSON.parse(row['status'].gsub('\'', '"'))
       m.info = JSON.parse(row["info"].gsub('\'', '"'))
@@ -49,6 +50,7 @@ namespace :slurp do
       m.is_main = row['is_main']
       m.next = row['next']
       m.goals = JSON.parse(row['goals'].gsub('\'', '"'))
+      m.rewards = JSON.parse(row['rewards'].gsub('\'', '"'))
       m.save
     end
     puts "There are now #{Quest.count} rows in the Quest table"

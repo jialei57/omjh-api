@@ -1,3 +1,4 @@
 id,name,is_unique,item_type,info
 1,"鸡肉",false,"other","{'description': '一块鸡肉.', 'price': 50}"
-2,"大葱",false,"other","{'description': '一根大葱.', 'price': 4}"
+2,"大葱",false,"other","{'description': '一根大葱.', 'price': 0}"
+3,"木柴",false,"other","{'description': '一捆木柴.', 'price': 0}"

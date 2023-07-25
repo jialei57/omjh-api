@@ -6,6 +6,7 @@ class CreateQuests < ActiveRecord::Migration[7.0]
       t.boolean :is_main
       t.integer :next
       t.json :goals
+      t.json :rewards
 
       t.timestamps
     end
