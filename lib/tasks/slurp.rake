@@ -65,11 +65,27 @@ namespace :slurp do
       m = Item.new
       m.id = row['id']
       m.name = row['name']
-      m.is_unique = row['is_unique']
       m.item_type = row['item_type']
-      m.info = JSON.parse(row['info'].gsub('\'', '"'))
+      m.description = row['description']
+      m.price = row['price']
       m.save
     end
     puts "There are now #{Item.count} rows in the Item table"
+  end
+
+  task loadSkills: :environment do
+    require "csv"
+    csv_text = File.read(Rails.root.join("lib", "data", "skills.csv"))
+    csv = CSV.parse(csv_text, :headers => true, :encoding => "UTF-8", )
+    csv.each do |row|
+      # puts row.to_hash
+      m = Skill.new
+      m.id = row['id']
+      m.name = row['name']
+      m.description = row['description']
+      m.action_desc = row['action_desc']
+      m.save
+    end
+    puts "There are now #{Skill.count} rows in the Skill table"
   end
 end

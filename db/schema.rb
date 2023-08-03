@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_083522) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_092610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,9 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_083522) do
 
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
-    t.boolean "is_unique"
     t.string "item_type"
-    t.json "info"
+    t.string "description"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_items_on_name", unique: true
@@ -62,6 +62,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_083522) do
     t.integer "next"
     t.json "goals"
     t.json "rewards"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.string "action_desc"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

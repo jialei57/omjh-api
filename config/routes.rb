@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'processing-quests/:id', to: 'characters#get_processing_quests'
   get 'items/:id', to: 'characters#get_items'
+  get 'npc-skills/:id', to: 'api#get_npc_skills'
   put 'complete-quest', to: 'characters#complete_quest'
   put 'killed-npc', to: 'characters#killed_npc'
 
