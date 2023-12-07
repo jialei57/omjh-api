@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_092610) do
     t.string "item_type"
     t.string "description"
     t.integer "price"
+    t.json "properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_items_on_name", unique: true
@@ -58,8 +59,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_092610) do
   create_table "quests", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
-    t.boolean "is_main"
-    t.integer "next"
+    t.string "quest_type"
+    t.integer "level_required"
+    t.integer "start_npc"
+    t.integer "end_npc"
+    t.string "start_line"
+    t.string "mid_line"
+    t.string "end_line"
     t.json "goals"
     t.json "rewards"
     t.datetime "created_at", null: false

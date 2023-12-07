@@ -1,7 +1,9 @@
-id,name,map,npc_type,last_die_time,status,info
-1,"阿黄",3,"npc",,"{}","{'description': '一只普通的黄狗.\n它跟你很熟, 一直不停的对你摇尾巴.', 'actions': ['talk'], 'dialogs': ['汪汪!', '汪汪汪汪!']}"
-2,"李寡妇",5,"npc",,"{}","{'description': '她看起来四十多岁.\n平时对你很照顾.', 'actions': ['talk'], 'dialogs': ['你也是个可怜的孩子...']}"
-3,"鸡",2,"animal",,"{'hp': 10, 'speed': 0, 'defense': 0, 'attack': 1, 'hit': 6, 'dodge': 6}","{'refresh_time': 30, 'description': '一只肥硕的大公鸡.', 'actions': ['kill'], 'normal_attack': '啄了一口', 'rewards':{'items': [{'id': 1, 'quantity': 1, 'probability': 1}]}}"
-4,"菜地",2,"npc",,"{}","{'description': '一片农家菜地. 菜畦上有一排已经成熟的大葱.', 'actions': ['collect'], 'rewards':{'items': [{'id': 2, 'quantity': 1, 'probability': 1}]}}"
-5,"管家",16,"npc",,"{}","{'description': '贾家的总管. 据说是个落第秀才. 平时对你倒也不赖.', 'actions': ['talk'], 'dialogs': ['今天有大人物要来. 你小子不要来捣乱.']}"
-6,"树",29,"npc",,"{}","{'description': '挺拔的松树. 枝叶繁茂.', 'actions': ['chop'], 'rewards':{'items': [{'id': 3, 'quantity': 1, 'probability': 1}]}}"
+id,name,map,npc_type,last_die_time,level,status,info
+1,"阿黄",3,"npc",,"1","{}","{'description': '一只普通的黄狗.\n它跟你很熟, 一直不停的对你摇尾巴.', 'actions': ['talk'], 'dialogs': ['汪汪!', '汪汪汪汪!']}"
+2,"李寡妇",5,"npc",,"1","{}","{'description': '她看起来四十多岁.\n平时对你很照顾.', 'actions': ['talk'], 'dialogs': ['你也是个可怜的孩子...']}"
+3,"鸡",2,"animal",,"1","{'hp': 10, 'speed': 8, 'defense': 0, 'attack': 1, 'hit': 6, 'dodge': 6}","{'refresh_time': 30, 'description': '一只肥硕的大公鸡.', 'actions': ['kill'], 'normal_attack': '啄了一口', 'rewards':{'items': [{'id': 1, 'quantity': 1, 'probability': 1}], 'exp': 1}}"
+4,"菜地",2,"npc",,"1","{}","{'description': '一片农家菜地. 菜畦上有一排已经成熟的大葱.', 'actions': ['collect'], 'rewards':{'items': [{'id': 2, 'quantity': 1, 'probability': 1}]}}"
+5,"老张头",7,"npc",,"1","{}","{'description': '他穿着朴素的衣物，手上沾满了泥土, 脸上愁眉不展.', 'actions': ['talk'], 'dialogs': ['哎, 这些该死的畜生!']}"
+6,"树",29,"npc",,"1","{}","{'description': '挺拔的松树. 枝叶繁茂.', 'actions': ['chop'], 'rewards':{'items': [{'id': 3, 'quantity': 1, 'probability': 1}]}}"
+7,"狼",28,"animal",,"2","{'hp': 30, 'speed': 2, 'defense': 0, 'attack': 8, 'hit': 5, 'dodge': 5}","{'refresh_time': 30, 'description': '一只凶猛的野狼.', 'actions': ['kill'], 'normal_attack': '咬了一口','rewards':{}}"
+8,"野猪",24,"animal",,"2","{'hp': 40, 'speed': 2, 'defense': 0, 'attack': 5, 'hit': 5, 'dodge': 4}","{'refresh_time': 30, 'description': '正在疯狂破坏农田的野猪.', 'actions': ['kill'], 'normal_attack': '撞了过来','rewards':{}}"

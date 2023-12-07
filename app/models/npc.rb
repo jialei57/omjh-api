@@ -1,4 +1,7 @@
 class Npc < ApplicationRecord
+    has_many :start_quests, class_name: 'Quest', foreign_key: 'start_npc'
+    has_many :end_quests, class_name: 'Quest', foreign_key: 'end_npc'
+    
     def die
         if npc_type == 'npc'
             return

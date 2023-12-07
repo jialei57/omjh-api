@@ -47,8 +47,13 @@ namespace :slurp do
       m.id = row['id']
       m.name = row['name']
       m.description = row['description']
-      m.is_main = row['is_main']
-      m.next = row['next']
+      m.quest_type = row['quest_type']
+      m.level_required = row['level_required']
+      m.start_npc = row['start_npc']
+      m.end_npc = row['end_npc']
+      m.start_line = row['start_line']
+      m.mid_line = row['mid_line']
+      m.end_line = row['end_line']
       m.goals = JSON.parse(row['goals'].gsub('\'', '"'))
       m.rewards = JSON.parse(row['rewards'].gsub('\'', '"'))
       m.save
@@ -68,6 +73,7 @@ namespace :slurp do
       m.item_type = row['item_type']
       m.description = row['description']
       m.price = row['price']
+      m.properties = JSON.parse(row['properties'].gsub('\'', '"'))
       m.save
     end
     puts "There are now #{Item.count} rows in the Item table"

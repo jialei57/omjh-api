@@ -5,6 +5,7 @@ class CreateItems < ActiveRecord::Migration[7.0]
       t.string :item_type
       t.string :description
       t.integer :price
+      t.json :properties
 
       t.timestamps
     end

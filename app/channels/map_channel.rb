@@ -15,12 +15,21 @@ class MapChannel < ApplicationCable::Channel
     char = Character.find(params[:charId])
     char.update(map: params[:id])
     chars = Character.where(map: params[:id]).joins(:user).where(users: { online: true })
-    npcs = Npc.where(map: params[:id]).select{|n| n.isAlive }
-    
+    npcs = Npc.includes(:start_quests).includes(:end_quests).where(map: params[:id]).select{|n| n.isAlive }
+
+    npcs_with_related = npcs.map do |npc|
+      {
+        npc: npc,
+        start_quests: npc.start_quests,
+        end_quests: npc.start_quests,
+        skills: Skill.where(id: npc.info['skills'])
+      }
+    end
+
     ActionCable.server.broadcast("map_#{params[:id]}", {
       map: params[:id],
       players: chars.to_json,
-      npcs: npcs.to_json,
+      npcs_with_related: npcs_with_related.to_json,
       action: 'enter'
     })
   end 

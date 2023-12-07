@@ -1,4 +1,6 @@
-id,name,item_type,description,price
-1,"鸡肉","other","一块鸡肉.",0
-2,"大葱","other","一根大葱.",0
-3,"木柴","other","一捆木柴.",0
+id,name,item_type,description,price,properties
+1,"鸡肉","other","一块鸡肉.",0,{}
+2,"大葱","other","一根大葱.",0,{}
+3,"木柴","other","一捆木柴.",0,{}
+4,"烧鸡腿","quest","一个香喷喷的鸡腿.",0,{}
+5,"玉佩","accessory","入手微凉的玉佩, 散发着淡淡的翠绿光芒. 佩戴上能使人神清气爽.",0,{'spi': 1}
