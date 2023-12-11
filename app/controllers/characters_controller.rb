@@ -1,7 +1,7 @@
 require 'authorize_api_request'
 
 class CharactersController < ApplicationController
-  before_action :set_character, only: %i[update destroy get_processing_quests accept_quest complete_quest killed_npc get_items]
+  before_action :set_character, only: %i[update destroy get_processing_quests accept_quest complete_quest killed_npc get_items equip take_off]
     
   # GET /characters
   def index
@@ -19,7 +19,7 @@ class CharactersController < ApplicationController
 
     @character = Character.new(character_params)
     expToLevelUp = getCurrentLevelExp(0)
-    @character.status = {level: 0, exp: 0, expToLevelUp: expToLevelUp, money: 0, items: [], skills: [], processingQuests: [], completedQuests: []}
+    @character.status = {level: 0, exp: 0, expToLevelUp: expToLevelUp, money: 0, equipments:{}, items: [], skills: [], processingQuests: [], completedQuests: []}
 
     if @character.save
       render json: @character, status: :created
@@ -41,6 +41,71 @@ class CharactersController < ApplicationController
   #     render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
   #   end
   # end
+
+  def equip
+    if @character.user_id != @current_user.id
+      render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
+      return
+    end
+
+    index = @character.status['items'].each_index.select {|e|  @character.status['items'][e]['id'] == params[:iid].to_i }
+    if index == nil
+      render json: { errors: 'You dont have this item' }, status: :unprocessable_entity
+      return
+    end
+
+    equipment = Item.find_by_id(params[:iid])
+    if equipment == nil
+      render json: { errors: 'No such item found' }, status: :unprocessable_entity
+      return
+    end
+
+    if equipment.item_type == 'other' || equipment.item_type == 'quest'
+      render json: { errors: 'Item cannot be equipped' }, status: :unprocessable_entity
+      return
+    end
+
+    equipments = @character.status['equipments']
+    take_off_id = equipments[equipment.item_type]
+    take_off_item(take_off_id)
+
+    equipments[equipment.item_type] = equipment.id
+    @character.status['items'][index.first]['quantity'] = @character.status['items'][index.first]['quantity'] - 1
+    @character.status['items'].delete_at(index.first) if @character.status['items'][index.first]['quantity'] <= 0
+    @character.save
+
+    render json: @character
+  end
+
+  def take_off 
+    if @character.user_id != @current_user.id
+      render json: { errors: @character.errors.full_messages }, status: :unprocessable_entity
+      return
+    end
+
+    equipment_id = @character.status['equipments'][params[:type]]
+    if equipment_id == nil
+      render json: { errors: 'Nothing to be took off' }, status: :unprocessable_entity
+      return
+    end
+
+    @character.status['equipments'].delete(params[:type])
+    take_off_item(equipment_id)
+    @character.save
+
+    render json: @character
+  end
+
+  def take_off_item(iid) 
+    if iid != nil
+      take_off_index = @character.status['items'].each_index.select {|e|  @character.status['items'][e]['id'] == iid}
+      if take_off_index != nil and take_off_index.first != nil
+        @character.status['items'][take_off_index.first]['quantity'] += 1;
+      else
+        @character.status['items'].push({ 'id' => iid, 'quantity' => 1})
+      end
+    end
+  end 
 
   def get_processing_quests
     if @character.user_id != @current_user.id
@@ -74,7 +139,13 @@ class CharactersController < ApplicationController
       items.push({ 'item' => item, 'quantity' => i['quantity'] })
     end
 
-    render json: items
+    equipments = {}
+    @character.status['equipments'].each_key do |k|
+      equipment = Item.find_by_id(@character.status['equipments'][k])
+      equipments[k] = equipment
+    end
+
+    render json: { items: items, equipments: equipments}
   end
 
   def complete_quest

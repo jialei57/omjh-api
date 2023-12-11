@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'items/:id', to: 'characters#get_items'
   get 'npc-related/:id', to: 'api#get_npc_related'
   put 'complete-quest', to: 'characters#complete_quest'
+  put 'equip', to: 'characters#equip'
+  put 'take_off', to: 'characters#take_off'
   put 'accept-quest', to: 'characters#accept_quest'
   put 'killed-npc', to: 'characters#killed_npc'
 
