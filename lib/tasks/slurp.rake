@@ -49,6 +49,7 @@ namespace :slurp do
       m.description = row['description']
       m.quest_type = row['quest_type']
       m.level_required = row['level_required']
+      m.pre_required = row['pre_required']
       m.start_npc = row['start_npc']
       m.end_npc = row['end_npc']
       m.start_line = row['start_line']

@@ -5,6 +5,7 @@ class CreateQuests < ActiveRecord::Migration[7.0]
       t.string :description
       t.string :quest_type
       t.integer :level_required
+      t.integer :pre_required
       t.integer :start_npc
       t.integer :end_npc
       t.string :start_line

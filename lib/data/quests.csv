@@ -1,3 +1,4 @@
-id,name,description,quest_type,level_required,start_npc,end_npc,start_line,mid_line,end_line,goals,rewards
-1,"收集食材","在李寡妇家后院收集一些食材.",side,0,2,2,"饿了吧?你去后院抓只鸡,在摘两根葱,我给你做点吃的.","鸡和葱都拿来了吗?","做好了,拿着吧.","{'items': [{'id': 1, 'quantity': 1}, {'id': 2, 'quantity': 2}]}","{'items': [{'id': 4, 'quantity': 1}]}"
-2,"保护农田","保护农田免受野兽侵害.",side,0,5,5,"我的田地最近被野猪糟蹋的不像样了, 你能帮我赶走他们吗?.","赶走野猪了吗?","真是太感谢你了, 今年的收成保住了. 这个是我家传的玉佩, 送给你吧.","{'kills': [{'name': '野猪', 'quantity': 2}]}","{'items': [{'id': 5, 'quantity': 1}]}"
+id,name,description,quest_type,level_required,pre_required,start_npc,end_npc,start_line,mid_line,end_line,goals,rewards
+1,"收集食材","在李寡妇家后院收集一些食材.",side,0,,2,2,"饿了吧? 你去后院抓只鸡, 在摘两根葱, 我给你做顿好吃的.","鸡和葱都拿来了吗?","做好了,拿着吧.","{'items': [{'id': 1, 'quantity': 1}, {'id': 2, 'quantity': 2}]}","{'items': [{'id': 4, 'quantity': 1}]}"
+2,"保护农田","保护农田免受野兽侵害.",side,0,,5,5,"我的田地最近被野猪糟蹋的不像样了, 你能帮我赶走他们吗?.","赶走野猪了吗?","真是太感谢你了, 今年的收成保住了. 这个是我家传的玉佩, 送给你吧.","{'kills': [{'name': '野猪', 'quantity': 2}]}","{'items': [{'id': 5, 'quantity': 1}]}"
+3,"找点吃的","帮老乞丐找来一个烧鸡腿.",side,0,,6,6,"好想吃烧鸡腿啊, 如果你能帮我找来一个, 我可以告诉你一个秘密.","烧鸡腿呢?","村南边的山谷里有个宝贝, 听说是仙人留下来的!","{'items': [{'id': 4, 'quantity': 1}]}","{}"

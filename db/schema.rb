@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_092610) do
     t.string "description"
     t.string "quest_type"
     t.integer "level_required"
+    t.integer "pre_required"
     t.integer "start_npc"
     t.integer "end_npc"
     t.string "start_line"
